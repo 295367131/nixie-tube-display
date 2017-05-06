@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数字显示器</title>
+	<link rel="stylesheet" href="iconfont/iconfont.css">
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<style>
+		.iconfont{
+			font-size: 100px;
+		}
+		.ledSvg{
+			margin:10px 0 10px -25px;
+			float: right;
+		}
+		.ledBox{
+			height: 100px;
+			width: 298px;
+			border: 1px solid #333333;
+			overflow: hidden;
+		}
+		table{
+			text-align: center;
+			font-size: 22px;
+			font-family:"微软雅黑";
+			border-right: 1px solid #333333;
+		}
+		table td{
+			width: 100px;
+			border:1px solid #333333;
+			border-top: none;
+			border-right: none;
+		}
+	</style>
+</head>
+<body>
+<div align="center" style="margin-top: 50px;">
+	<div class="ledBox">
+		
+	</div>
+	
+	<table width="300" height="300" cellpadding="0" cellspacing="0">
+		<tr>
+			<td onclick="icon(1)">1</td>
+			<td onclick="icon(2)">2</td>
+			<td onclick="icon(3)">3</td>
+		</tr>
+		<tr>
+			<td onclick="icon(4)">4</td>
+			<td onclick="icon(5)">5</td>
+			<td onclick="icon(6)">6</td>
+		</tr>
+		<tr>
+			<td onclick="icon(7)">7</td>
+			<td onclick="icon(8)">8</td>
+			<td onclick="icon(9)">9</td>
+		</tr>
+		<tr>
+			<td onclick="del()">删除</td>
+			<td onclick="icon(0)">0</td>
+			<td onclick="empty()">清空</td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript">
+var ledSvg = '<svg class="ledSvg" style="height:80px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><defs/><path class="led1" d="M 249.998 57.582 L 342.474 151.988 L 655.047 153.172 L 748.231 57.262 L 249.998 57.582 Z" style="fill: #333333;opacity:0;"/><path class="led2" d="M 766.897 76.096 L 671.398 171.595 L 671.398 425.97 L 732.17 486.742 L 766.897 452.015 L 766.897 76.096 Z" style="fill: #333333;opacity:0;"/><path class="led3" d="M 767.241 933.18 L 671.742 837.681 L 671.742 583.306 L 732.514 522.534 L 767.241 557.261 L 767.241 933.18 Z" style="fill: #333333;opacity:0;"/><path class="led4" d="M 251.034 950.958 L 343.51 856.552 L 656.083 855.368 L 749.267 951.278 L 251.034 950.958 Z" style="fill: #333333;opacity:0;"/><path class="led5" d="M 327.083 522.19 L 231.584 617.689 L 231.584 872.064 L 292.356 932.836 L 327.083 898.109 L 327.083 522.19 Z" style="fill: #333333;opacity:0;" transform="matrix(-1, 0, 0, -1, 558.666993, 1455.025994)"/><path class="led6" d="M 326.427 485.398 L 230.928 389.899 L 230.928 135.524 L 291.7 74.752 L 326.427 109.479 L 326.427 485.398 Z" style="fill: #333333;opacity:0;" transform="matrix(-1, 0, 0, -1, 557.355015, 560.150033)"/><path class="led7" d="M 331.371 456.002 L 664.44 456.002 L 714.32 504.594 L 666.049 551.256 L 331.371 551.578 L 284.709 504.916 L 331.371 456.002 Z" style="fill: #333333;opacity:0;"/></svg>'
+
+
+function icon(nub){
+	$(".ledBox").prepend(ledSvg);
+	var LED = new Array();
+	LED[0]='.led1,.led2,.led3,.led4,.led5,.led6';
+	LED[1]='.led2,.led3';
+	LED[2]='.led1,.led2,.led4,.led5,.led7';
+	LED[3]='.led1,.led2,.led3,.led4,.led7';
+	LED[4]='.led2,.led3,.led6,.led7';
+	LED[5]='.led1,.led3,.led4,.led6,.led7';
+	LED[6]='.led1,.led3,.led4,.led5,.led6,.led7';
+	LED[7]='.led1,.led2,.led3';
+	LED[8]='.led1,.led2,.led3,.led4,.led5,.led6,.led7';
+	LED[9]='.led1,.led2,.led3,.led4,.led6,.led7';
+	setTimeout(function(){
+		$(".ledSvg:first-child").children(LED[nub]).css("opacity","1");
+	},1)
+	
+}
+function del(){
+	$(".ledSvg:first-child").remove();
+}
+function empty(){
+	$(".ledSvg").remove();
+}
+</script>
+</body>
+</html>
